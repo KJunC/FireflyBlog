@@ -223,6 +223,8 @@ export const en: Translation = {
 	[Key.siteStatsDaysAgo]: "{days} days ago",
 	[Key.siteStatsDays]: "{days} days",
 	[Key.today]: "Today",
+	[Key.siteStatsVisitCount]: "Visits",
+	[Key.siteStatsPersonCount]: "Visitors",
 
 	// Calendar Component
 	[Key.calendarSunday]: "Sun",

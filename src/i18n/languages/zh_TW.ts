@@ -216,6 +216,8 @@ export const zh_TW: Translation = {
 	[Key.siteStatsDaysAgo]: "{days} 天前",
 	[Key.siteStatsDays]: "{days} 天",
 	[Key.today]: "今天",
+	[Key.siteStatsVisitCount]: "訪問量",
+	[Key.siteStatsPersonCount]: "訪客數",
 
 	// 日曆組件
 	[Key.calendarSunday]: "日",

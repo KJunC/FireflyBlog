@@ -224,6 +224,8 @@ export const ru: Translation = {
 	[Key.siteStatsDaysAgo]: "{days} дней назад",
 	[Key.siteStatsDays]: "{days} дней",
 	[Key.today]: "Сегодня",
+	[Key.siteStatsVisitCount]: "Просмотров",
+	[Key.siteStatsPersonCount]: "Посетителей",
 
 	// Компонент календаря
 	[Key.calendarSunday]: "Вс",

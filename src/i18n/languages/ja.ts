@@ -222,6 +222,9 @@ export const ja: Translation = {
 	[Key.siteStatsDaysAgo]: "{days} 日前",
 	[Key.siteStatsDays]: "{days} 日",
 	[Key.today]: "今日",
+	[Key.siteStatsVisitCount]: "訪問回数",
+	[Key.siteStatsPersonCount]: "訪問者数",
+
 
 	// カレンダーコンポーネント
 	[Key.calendarSunday]: "日",

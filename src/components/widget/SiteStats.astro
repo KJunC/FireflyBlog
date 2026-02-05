@@ -83,6 +83,20 @@ const stats = [
 		value: totalWords,
 		formatted: true,
 	},
+    // --- 新增：不蒜子 访问量 (PV) ---
+    {
+        icon: "material-symbols:visibility-outline", // 眼睛图标
+        label: i18n(I18nKey.siteStatsVisitCount), // 访问量
+        value: "...", // 加载时的占位符
+        nativeId: "busuanzi_value_site_pv" // 不蒜子要求的特定 ID
+    },
+    // --- 新增：不蒜子 访客数 (UV) ---
+    {
+        icon: "material-symbols:person-outline", // 人像图标
+        label: i18n(I18nKey.siteStatsPersonCount), // 访客数
+        value: "...", 
+        nativeId: "busuanzi_value_site_uv" // 不蒜子要求的特定 ID
+    },
 	{
 		icon: "material-symbols:calendar-clock-outline",
 		label: i18n(I18nKey.siteStatsRunningDays),
@@ -115,11 +129,13 @@ const stats = [
           </span>
         </div>
         <div class="flex items-center">
+          {/* 修改点：添加了 id={stat.nativeId} 以支持不蒜子 */}
           <span 
             class="text-base font-bold text-neutral-900 dark:text-neutral-100"
             data-stat-id={stat.id}
+            id={stat.nativeId} 
           >
-            {stat.formatted ? formatNumber(stat.value) : stat.value}
+            {stat.formatted && typeof stat.value === 'number' ? formatNumber(stat.value) : stat.value}
           </span>
           {stat.suffix && (
             <span class="text-sm text-neutral-500 dark:text-neutral-400 ml-1">
@@ -131,6 +147,8 @@ const stats = [
     ))}
   </div>
 </WidgetLayout>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 <script is:inline define:vars={{ siteStartDate, lastPostDate, todayText }}>
   function updateDynamicStats() {
@@ -172,8 +190,10 @@ const stats = [
   // 页面加载时更新
   updateDynamicStats();
 
-  // 页面切换时重新更新
+  // 页面切换时重新更新 (Swup 兼容)
   document.addEventListener("swup:contentReplaced", () => {
     setTimeout(updateDynamicStats, 100);
+    // 注意：不蒜子在 SPA/Swup 切换时可能不会自动刷新。
+    // 如果发现切换页面数字不显示，可以在这里重新加载不蒜子脚本，或者依靠重新渲染组件来触发。
   });
 </script>
