@@ -24,17 +24,17 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否启用主页横幅文字
 			enable: true,
 			// 主页横幅主标题
-			title: "Lovely firefly!",
+			title: "SIGNAL DETECTED",
 			// 主页横幅主标题字体大小
 			titleSize: "3.8rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
+				"协议握手成功，欢迎接入底层神经元",
+				"碳基躯壳只是载体，数据意识才是永恒",
+				"于虚无的 0 与 1 之间，侦测到灵魂的震荡",
+				"在杂波涌动的电子荒原，捕捉唯一的真实",
+				"跨越视界线，捕捉遗失的电波",
+				"熵增不可逆，但逻辑可以永存",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
@@ -55,9 +55,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		credit: {
 			enable: {
 				// 桌面端显示横幅图片来源文本
-				desktop: true,
+				desktop: false,
 				// 移动端显示横幅图片来源文本
-				mobile: true,
+				mobile: false,
 			},
 			text: {
 				// 桌面端要显示的来源文本
