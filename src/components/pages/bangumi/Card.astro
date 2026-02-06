@@ -65,7 +65,7 @@ const displayTags =
 ---
 
 <a
-  href={`${subject_base_url}${item.subject.id}`}
+  href={item.subject.url || `${subject_base_url}${item.subject.id}`}
   target="_blank"
   rel="noopener noreferrer nofollow"
   class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-2xl transition-all duration-200 hover:scale-105 block"

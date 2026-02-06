@@ -45,20 +45,41 @@ const bangumiConfig = {
 // Steam 配置 (新增)
 const steamConfig = {
 	// 请在这里填入你的 Steam ID (64位数字) 和 API Key
-	steamId: "", // 例: "76561198000000000" (在 https://store.steampowered.com/account/ 查看)
-	apiKey: "",  // 例: "XXXXXXXXXXXXXXXX" (在 https://steamcommunity.com/dev/apikey 免费申请)
+	steamId: "76561198069034299", // 例: "76561198000000000" (在 https://store.steampowered.com/account/ 查看)
+	apiKey: "D01F4BF09D9F7FA25B8FAF7EFBEC6A2B",  // 例: "XXXXXXXXXXXXXXXX" (在 https://steamcommunity.com/dev/apikey 免费申请)
 };
 
 // 起点/手动书单配置 (新增)
 const manualBooks = [
 	// 示例数据 (你可以复制一份修改，不需要的可以删掉)
 	{
-		id: 1031777108, // 随便填个数字，不重复就行
-		title: "道诡异仙",
-		cover: "https://bookcover.yuewen.com/qdbimg/349573/1031777108/600", // 封面图片链接
+		id: 1044312679, // 随便填个数字，不重复就行
+		title: "第四天灾从不相信钢铁洪流！",
+		type: 3, // 1:想看, 2:读过, 3:在读
+		url: "https://www.qidian.com/book/1044312679/",
+		cover: "https://bookcover.yuewen.com/qdbimg/349573/1044312679/600.webp", // 封面图片链接
+		score: 8, // 你的评分
+		comment: "很有意思", // 简短评价
+		author: "喀秋莎第一可爱"
+	},
+	{
+		id: 1037951424, // 随便填个数字，不重复就行
+		title: "东京道士异闻录",
+		type: 2, // 2 代表读过
+		url: "https://www.qidian.com/book/1037951424/",
+		cover: "https://bookcover.yuewen.com/qdbimg/349573/1037951424/600.webp", // 封面图片链接
 		score: 9, // 你的评分
-		comment: "非常精彩的克苏鲁修仙", // 简短评价
-		author: "狐尾的笔"
+		comment: "东京鬼怪万事屋", // 简短评价
+		author: "庚星南"
+	},
+	{
+		id: 1042715250, // 随便填个数字，不重复就行
+		title: "穿甲弹不相信碳基怪物",
+		url: "https://www.qidian.com/book/1042715250/",
+		cover: "https://bookcover.yuewen.com/qdbimg/349573/1042715250/600.webp", // 封面图片链接
+		score: 9, // 你的评分
+		comment: "模式军事建设", // 简短评价
+		author: "嘟嘟雪球来啦"
 	},
 	// 在这里继续添加更多书...
 ];
@@ -177,11 +198,14 @@ async function fetchSteamData() {
 		return games.map((game: any) => ({
 			subject_id: game.appid,
 			subject_type: 4,
+			type: 2, // 2 代表 "玩过/看过" (Collect)
 			rate: 0,
 			comment: `总时长: ${(game.playtime_forever / 60).toFixed(1)} 小时`,
 			tags: [],
 			subject: {
 				id: game.appid,
+				type: 4,
+				url: `https://store.steampowered.com/app/${game.appid}/`,
 				name: game.name,
 				name_cn: game.name,
 				images: {
@@ -266,11 +290,14 @@ if (manualBooks.length > 0) {
 	const bookData = manualBooks.map((book) => ({
 		subject_id: book.id,
 		subject_type: 1,
+		type: book.type || 3, // 优先使用书单里的设置，默认 "在读"
 		rate: book.score,
 		comment: book.comment,
 		tags: [book.author],
 		subject: {
 			id: book.id,
+			type: 1,
+			url: book.url,
 			name: book.title,
 			name_cn: book.title,
 			images: {

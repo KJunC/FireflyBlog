@@ -19,19 +19,19 @@ export const profileConfig: ProfileConfig = {
 	links: [
 		{
 			name: "Steam",
-			icon: "fa6-brands:steam",
+			icon: "fa7-brands:steam",
 			url: "https://steamcommunity.com/id/GarfieldFish/",
 			showName: false,
 		},
 		{
 			name: "GitHub",
-			icon: "fa6-brands:github",
+			icon: "fa7-brands:github",
 			url: "https://github.com/KJunC",
 			showName: false,
 		},
 		{
 			name: "Email",
-			icon: "fa6-solid:envelope",
+			icon: "fa7-solid:envelope",
 			url: "mailto:mail@jcaonet.com",
 			showName: false,
 		},

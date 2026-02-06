@@ -34,8 +34,8 @@ const statusCounts = items.reduce(
 	{} as Record<string, number>,
 );
 
-const isGame = sectionId === "game";
-const isBook = sectionId === "book";
+const isGame = sectionId === "game" || sectionId === "steam";
+const isBook = sectionId === "book" || sectionId === "manual_books";
 const isMusic = sectionId === "music";
 
 const getFilterLabel = (type: "collect" | "doing" | "wish") => {
