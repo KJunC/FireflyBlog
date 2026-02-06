@@ -22,5 +22,3 @@ docker run -d \
 echo "容器已在后台运行。名字: $CONTAINER_NAME"
 echo "查看日志请运行: docker logs -f $CONTAINER_NAME"
 echo "停止运行请运行: docker stop $CONTAINER_NAME"
-
-#停止命令 docker stop devblog
