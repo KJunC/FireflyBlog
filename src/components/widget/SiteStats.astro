@@ -148,7 +148,15 @@ const stats = [
   </div>
 </WidgetLayout>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script is:inline>
+  // 检查是否已经加载过不蒜子，防止因为组件多次渲染导致重复加载（例如移动端和桌面端侧边栏共存时）
+  if (!document.querySelector('script[src*="busuanzi.pure.mini.js"]')) {
+      const script = document.createElement('script');
+      script.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+      script.async = true;
+      document.head.appendChild(script);
+  }
+</script>
 
 <script is:inline define:vars={{ siteStartDate, lastPostDate, todayText }}>
   function updateDynamicStats() {

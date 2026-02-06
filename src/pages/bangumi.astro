@@ -27,10 +27,10 @@ const bangumiConfig = {
 	username: siteConfig.bangumi?.userId, // 在这里配置你的Bangumi用户名
 	apiUrl: "https://api.bgm.tv",
 	categories: {
-		book: true,
-		anime: true,
-		music: true,
-		game: true,
+		book: false,
+		anime: false,
+		music: false,
+		game: false,
 		real: false,
 	},
 	// 数据获取设置
@@ -41,6 +41,27 @@ const bangumiConfig = {
 	},
 };
 //////////////////////////////////////////////////
+
+// Steam 配置 (新增)
+const steamConfig = {
+	// 请在这里填入你的 Steam ID (64位数字) 和 API Key
+	steamId: "", // 例: "76561198000000000" (在 https://store.steampowered.com/account/ 查看)
+	apiKey: "",  // 例: "XXXXXXXXXXXXXXXX" (在 https://steamcommunity.com/dev/apikey 免费申请)
+};
+
+// 起点/手动书单配置 (新增)
+const manualBooks = [
+	// 示例数据 (你可以复制一份修改，不需要的可以删掉)
+	{
+		id: 1031777108, // 随便填个数字，不重复就行
+		title: "道诡异仙",
+		cover: "https://bookcover.yuewen.com/qdbimg/349573/1031777108/600", // 封面图片链接
+		score: 9, // 你的评分
+		comment: "非常精彩的克苏鲁修仙", // 简短评价
+		author: "狐尾的笔"
+	},
+	// 在这里继续添加更多书...
+];
 
 // 分类映射
 const categoryMap = {
@@ -136,6 +157,50 @@ async function fetchBangumiData(username: string, subjectType: number) {
 	}
 }
 
+// 获取 Steam 数据
+async function fetchSteamData() {
+	if (!steamConfig.steamId || !steamConfig.apiKey) return [];
+	try {
+		console.log("[Steam] 开始获取 Steam 游戏数据...");
+		const url = `https://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${steamConfig.apiKey}&steamid=${steamConfig.steamId}&format=json&include_appinfo=1&include_played_free_games=1`;
+		const response = await fetch(url);
+		const data = await response.json();
+		
+		if (!data.response || !data.response.games) {
+			console.warn("[Steam] 未获取到游戏数据");
+			return [];
+		}
+
+		// 按游玩时间排序 (从多到少)
+		const games = data.response.games.sort((a: any, b: any) => b.playtime_forever - a.playtime_forever);
+
+		return games.map((game: any) => ({
+			subject_id: game.appid,
+			subject_type: 4,
+			rate: 0,
+			comment: `总时长: ${(game.playtime_forever / 60).toFixed(1)} 小时`,
+			tags: [],
+			subject: {
+				id: game.appid,
+				name: game.name,
+				name_cn: game.name,
+				images: {
+					large: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/library_600x900.jpg`, // 竖版封面
+					common: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`, // 横版封面
+					medium: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`,
+					small: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`,
+					grid: `https://cdn.cloudflare.steamstatic.com/steam/apps/${game.appid}/header.jpg`,
+				},
+				date: "",
+				score: 0
+			}
+		}));
+	} catch (error) {
+		console.error("[Steam] 获取数据失败:", error);
+		return [];
+	}
+}
+
 // 获取所有启用分类的数据
 const bangumiData: Record<string, UserSubjectCollection[]> = {};
 const tabs: Array<{ id: string; name: string; count: number }> = [];
@@ -181,6 +246,50 @@ for (const [categoryKey, enabled] of Object.entries(bangumiConfig.categories)) {
 			});
 		}
 	}
+}
+
+// 获取并添加 Steam 数据
+if (steamConfig.steamId && steamConfig.apiKey) {
+	const steamGames = await fetchSteamData();
+	if (steamGames.length > 0) {
+		bangumiData["steam"] = steamGames;
+		tabs.push({
+			id: "steam",
+			name: "Steam 游戏库",
+			count: steamGames.length,
+		});
+	}
+}
+
+// 处理手动书单数据
+if (manualBooks.length > 0) {
+	const bookData = manualBooks.map((book) => ({
+		subject_id: book.id,
+		subject_type: 1,
+		rate: book.score,
+		comment: book.comment,
+		tags: [book.author],
+		subject: {
+			id: book.id,
+			name: book.title,
+			name_cn: book.title,
+			images: {
+				large: book.cover,
+				common: book.cover,
+				medium: book.cover,
+				small: book.cover,
+				grid: book.cover,
+			},
+			date: "",
+			score: book.score,
+		},
+	}));
+	bangumiData["manual_books"] = bookData;
+	tabs.push({
+		id: "manual_books",
+		name: "起点书架", // 这里设置显示的标签页名称
+		count: bookData.length,
+	});
 }
 
 const activeTab = tabs[0]?.id || "anime";
@@ -229,10 +338,10 @@ const activeTab = tabs[0]?.id || "anime";
             <Icon name="material-symbols:settings" class="text-[2rem] text-(--btn-content)" />
           </div>
           <h2 class="text-xl font-semibold text-black/80 dark:text-white/80 mb-3">
-            {isUserIdConfigured ? i18n(I18nKey.bangumiEmpty) : "未配置 Bangumi 用户ID"}
+            {(isUserIdConfigured || (steamConfig.steamId && steamConfig.apiKey) || manualBooks.length > 0) ? i18n(I18nKey.bangumiEmpty) : "未配置数据源"}
           </h2>
           <p class="text-black/60 dark:text-white/60 mb-4 max-w-md mx-auto">
-            {isUserIdConfigured ? i18n(I18nKey.bangumiEmptyReason) : "请在 src/config/siteConfig.ts 中配置你的 Bangumi 用户ID"}
+            请在配置文件中设置 Bangumi ID 或在 bangumi.astro 中设置 Steam API Key
           </p>
         </div>
       )}
