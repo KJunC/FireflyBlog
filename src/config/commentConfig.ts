@@ -21,7 +21,7 @@ export const commentConfig: CommentConfig = {
 		// 设置 Waline 评论系统语言
 		lang: "zh-CN",
 		// 评论登录模式。可选值如下：
-		//   'enable'   —— 默认，允许访客匿名评论和用第三方 OAuth 登录评论，兼容性最佳。扯淡
+		//   'enable'   —— 默认，允许访客匿名评论和用第三方 OAuth 登录评论，兼容性最佳
 		//   'force'    —— 强制必须登录后才能评论，适合严格社区，关闭匿名评论。
 		//   'disable'  —— 禁止所有登录和 OAuth，仅允许匿名评论（填写昵称/邮箱），适用于极简留言。
 		login: "enable",

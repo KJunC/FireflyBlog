@@ -133,7 +133,7 @@ const stats = [
           <span 
             class="text-base font-bold text-neutral-900 dark:text-neutral-100"
             data-stat-id={stat.id}
-            id={stat.nativeId} 
+            data-busuanzi-id={stat.nativeId}
           >
             {stat.formatted && typeof stat.value === 'number' ? formatNumber(stat.value) : stat.value}
           </span>
@@ -155,6 +155,46 @@ const stats = [
       script.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
       script.async = true;
       document.head.appendChild(script);
+  }
+
+  // 不蒜子数据同步脚本
+  // 解决移动端和桌面端组件共存时，ID重复导致其中一个无法显示数据的问题
+  {
+      const busuanziIds = ["busuanzi_value_site_pv", "busuanzi_value_site_uv"];
+      
+      const syncBusuanzi = () => {
+          busuanziIds.forEach(id => {
+              // 1. 创建或获取隐藏的“真身”元素，供不蒜子脚本写入数据
+              let master = document.getElementById(id);
+              if (!master) {
+                  master = document.createElement('span');
+                  master.id = id;
+                  master.style.display = 'none';
+                  document.body.appendChild(master);
+              }
+
+              const update = () => {
+                  const value = master.textContent;
+                  if (value && value.trim().length > 0) {
+                      document.querySelectorAll(`[data-busuanzi-id="${id}"]`).forEach(el => {
+                          el.textContent = value;
+                      });
+                  }
+              };
+
+              // 立即同步一次（处理页面切换后数据已存在的情况）
+              update();
+
+              // 2. 监听“真身”元素的变化，只绑定一次
+              if (!master.hasAttribute('data-observed')) {
+                  const observer = new MutationObserver(update);
+                  observer.observe(master, { childList: true, characterData: true, subtree: true });
+                  master.setAttribute('data-observed', 'true');
+              }
+          });
+      };
+
+      syncBusuanzi();
   }
 </script>
 

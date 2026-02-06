@@ -27,16 +27,22 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		// 子菜单
 		children: [
 			{
-				name: "GitHub",
-				url: "https://github.com/CuteLeaf/Firefly",
+				name: "API查询",
+				url: "https://overapi.com/",
 				external: true,
-				icon: "fa7-brands:github",
+				icon: "material-symbols:code",
 			},
 			{
 				name: "Cloudflare",
 				url: "https://www.cloudflare.com/",
 				external: true,
 				icon: "fa7-brands:cloudflare",
+			},
+			{
+				name: "热门开源项目",
+				url: "https://hellogithub.com/",
+				external: true,
+				icon: "fa7-brands:github",
 			},
 		],
 	});
