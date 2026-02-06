@@ -8,7 +8,7 @@ export const profileConfig: ProfileConfig = {
 	name: "加菲魚",
 
 	// 个人签名
-	bio: "Hello, I'm 加菲魚.",
+	bio: "堆内存中的一个持久化对象。",
 
 	// 链接配置
 	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons
