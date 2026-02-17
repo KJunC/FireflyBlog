@@ -1,5 +1,4 @@
 <img alt="firefly" src="./docs/images/1.webp" />
-<img alt="Lighthouse" src="./docs/images/Lighthouse.png" />
 
 ---
 📖 README：
