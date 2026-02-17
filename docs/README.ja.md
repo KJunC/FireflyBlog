@@ -8,7 +8,7 @@
 > 
 > ![Node.js >= 22](https://img.shields.io/badge/node.js-%3E%3D22-brightgreen) 
 ![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
-![Astro](https://img.shields.io/badge/Astro-5.16.15-orange)
+![Astro](https://img.shields.io/badge/Astro-5.17.2-orange)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue)
 >
 > [![Stars](https://img.shields.io/github/stars/CuteLeaf/Firefly?style=social)](https://github.com/CuteLeaf/Firefly/stargazers)
@@ -42,6 +42,7 @@
 🔧 高度にカスタマイズ可能：ほとんどの機能モジュールは設定ファイルでカスタマイズ可能
 
 <img alt="firefly" src="./images/1.webp" />
+<img alt="Lighthouse" src="./images/Lighthouse.png" />
 
 >[!TIP]
 >Fireflyは、AstroフレームワークとFuwariテンプレートをベースに開発された、清新で美しい個人ブログテーマテンプレートです。技術愛好家やコンテンツクリエイター向けに設計されています。このテーマはモダンなWeb技術スタックを統合し、豊富な機能モジュールと高度にカスタマイズ可能なインターフェースを提供し、プロフェッショナルで美しい個人ブログウェブサイトを簡単に作成できます。
@@ -86,7 +87,7 @@
 - [x] **Bangumi** - Bangumi APIベースのアニメとゲーム記録表示
 - [x] **コメントシステム** - Twikoo、Waline、Giscus、Disqus、Artalkコメントシステムを統合
 - [x] **訪問者数統計** - Waline、Twikoo組み込みの訪問追跡を呼び出し可能
-- [x] **音楽プレーヤー** - APlayerベース、ローカル音楽とMeting APIオンライン音楽をサポート
+- [x] **音楽プレーヤー** - Material Design 3 デザインの音楽プレーヤー
 
 ### コンテンツ拡張
 - [x] **画像ライトボックス** - Fancybox画像プレビュー機能
@@ -248,20 +249,32 @@ Astroがデフォルトで対応している[GitHub Flavored Markdown](https://g
 
 ## 🙏 謝辞
 
-- [fuwari](https://github.com/saicaca/fuwari)テンプレートを開発した[saicaca](https://github.com/saicaca)に深く感謝します。Fireflyはこのテンプレートをベースに開発されています
-- ブロガー[霞葉](https://kasuha.com)の[Bangumiコレクション表示](https://kasuha.com/posts/fuwari-enhance-ep2/)と[メール保護・画像タイトル](https://kasuha.com/posts/fuwari-enhance-ep1/)案を参考にしました
-- [Mizuki](https://github.com/matsuzaka-yuki/Mizuki)のバナータイトル/多階層メニューナビゲーションバー/桜エフェクト/KaTeX/Fancyboxソリューションを参考にしました
-- [Astro](https://astro.build)と[Tailwind CSS](https://tailwindcss.com)を使用して構築
-- [MetingJS](https://github.com/metowolf/MetingJS)と[APlayer](https://github.com/MoePlayer/APlayer)音楽プレーヤーを使用
-- Bilibili UP主[公公的日常](https://space.bilibili.com/3546750017080050)が提供するQ版`蛍`マスコットスライスデータモデルを使用
-- アイコンは[Iconify](https://iconify.design/)から
-- 蛍関連の画像素材の著作権はゲーム[「崩壊：スターレイル」](https://sr.mihoyo.com/)の開発元[miHoYo](https://www.mihoyo.com/)に帰属します。
+[fuwari](https://github.com/saicaca/fuwari)テンプレートを開発した[saicaca](https://github.com/saicaca)に深く感謝します。Fireflyはこのテンプレートをベースに二次開発されています。
+
+蛍関連の画像素材の著作権はゲーム[「崩壊：スターレイル」](https://sr.mihoyo.com/)の開発元[miHoYo](https://www.mihoyo.com/)に帰属します。
+
+### 技術スタック
+
+- [Astro](https://astro.build) 
+- [Tailwind CSS](https://tailwindcss.com) 
+- [Iconify](https://iconify.design)
+
+### インスピレーションプロジェクト
+
+- [fuwari](https://github.com/saicaca/fuwari)
+- [hexo-theme-shoka](https://github.com/amehime/hexo-theme-shoka)
+- [astro-koharu](https://github.com/cosZone/astro-koharu)
+- [Mizuki](https://github.com/matsuzaka-yuki/Mizuki)
+
+### その他の参考
+- ブロガー`霞葉`の [Bangumi コレクション](https://kasuha.com/posts/fuwari-enhance-ep2/) ページコンポーネント
+- Bilibiliクリエイター `公公的日常` のQ版 [蛍看板娘Spineモデル](https://www.bilibili.com/video/BV1fuVzzdE5y)
 
 ## 📝 ライセンス
 
 本プロジェクトは [MIT license](https://mit-license.org/) の下で公開されています。詳細は [LICENSE](../LICENSE) ファイルをご覧ください。
 
-最初は [saicaca/fuwari](https://github.com/saicaca/fuwari) からフォークされました。元の作者の貢献に感謝します。元のプロジェクトは [MIT License](https://mit-license.org/) の下で公開されています。
+最初は [saicaca/fuwari](https://github.com/saicaca/fuwari) からフォークされました。元の作者の貢献に感謝します。
 
 **著作権表示：**
 - Copyright (c) 2024 [saicaca](https://github.com/saicaca) - [fuwari](https://github.com/saicaca/fuwari)
